@@ -1,32 +1,32 @@
-// Loginscreen.js
+// OgName: CardScreen.js
 import React, { Component, Fragment } from 'react';
 // React Native does not have html components so need these
 import { Button, View, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Login from '../components/Login';
-import LoginTitle from '../components/LoginTitle';
+import MainTitle from '../components/MainTitle';
+import Main from '../components/Main';
 
 // Professor's Code Commented Out
 // Using Functional Components for now since they're simpler
-/*export default class Homescreen extends Component {
+/*export default class Cardscreen extends Component {
   render() {
     return (
-      <View>
-        <Text>Login Screen</Text>
-        <Button title="Do Login" onPress={() => this.props.navigation.navigate("Card")}/>
+      <View style={{ backgroundColor:'#ff0000', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Card Screen</Text>
+        <Button title="To Login" onPress={() => this.props.navigation.navigate('Login')}/>
       </View>
     )
   }
 }*/
 
-function LoginScreen(props)
+function MainScreen(props)
 {
    return(
     // Need to have fragment in react native to call multiple components
     <Fragment>
-      <LoginTitle />
-      <Login appNavigator={props.navigation}/>
+      <MainTitle />
+      <Main appNavigator={props.navigation} />
     </Fragment>
    );
 };
-export default LoginScreen;
+export default MainScreen;
