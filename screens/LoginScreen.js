@@ -1,10 +1,8 @@
 // Loginscreen.js
-import React, { Component, Fragment } from 'react';
-// React Native does not have html components so need these
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import React, { Fragment } from 'react';
 import Login from '../components/Login';
 import LoginTitle from '../components/LoginTitle';
+import CreateNewAccount from '../components/CreateNewAccount';
 
 // Professor's Code Commented Out
 // Using Functional Components for now since they're simpler
@@ -26,6 +24,7 @@ function LoginScreen(props)
     <Fragment>
       <LoginTitle />
       <Login appNavigator={props.navigation}/>
+      <CreateNewAccount appNavigator={props.navigation}/>
     </Fragment>
    );
 };

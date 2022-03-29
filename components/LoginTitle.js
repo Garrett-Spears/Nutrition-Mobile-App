@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-// React Native does not have html components so need these
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import React from 'react';
+import { View, Text } from 'react-native';
 
 function LoginTitle()
 {

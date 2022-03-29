@@ -1,10 +1,10 @@
 // App.js
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
+import RegisterScreen from './screens/RegisterScreen';
 export default class App extends React.Component {
   render() {
     return <AppContainer />;
@@ -14,13 +14,19 @@ const AppNavigator = createStackNavigator({
   Login: {
     screen: LoginScreen,
     navigationOptions: {
-      //header: null // Will hide header for HomePage
+      //header: null // Will hide header for login screen
     }
   },
   Home: {
     screen: MainScreen,
     navigationOptions: {
-      //header: null // Will hide header for HomePage
+      //header: null // Will hide header for main screen
+    }
+  },
+  Register: {
+    screen: RegisterScreen,
+    navigationOptions: {
+      //header: null // Will hide header for register screen
     }
   }
 },{
