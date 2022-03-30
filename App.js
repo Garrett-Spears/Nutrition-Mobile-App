@@ -4,7 +4,9 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
+import ResetPasswordRequestScreen from './screens/ResetPasswordRequestScreen';
 import RegisterScreen from './screens/RegisterScreen';
+
 export default class App extends React.Component {
   render() {
     return <AppContainer />;
@@ -21,6 +23,12 @@ const AppNavigator = createStackNavigator({
     screen: MainScreen,
     navigationOptions: {
       //header: null // Will hide header for main screen
+    }
+  },
+  ResetPasswordRequest: {
+    screen: ResetPasswordRequestScreen,
+    navigationOptions: {
+      //header: null // Will hide header for register screen
     }
   },
   Register: {

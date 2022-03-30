@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import Login from '../components/Login';
 import LoginTitle from '../components/LoginTitle';
 import CreateNewAccount from '../components/CreateNewAccount';
+import ForgotPassword from '../components/ForgotPassword';
 
 // Professor's Code Commented Out
 // Using Functional Components for now since they're simpler
@@ -24,6 +25,7 @@ function LoginScreen(props)
     <Fragment>
       <LoginTitle />
       <Login appNavigator={props.navigation}/>
+      <ForgotPassword appNavigator={props.navigation}/>
       <CreateNewAccount appNavigator={props.navigation}/>
     </Fragment>
    );

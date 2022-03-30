@@ -80,8 +80,8 @@ function Register(props)
                 secureTextEntry={true}
                 onChangeText={(text) => setPassword(text)} 
             />
-            <Button title="Create Account" onPress={() => doRegister()}/>
             <Text>{message}</Text>
+            <Button title="Create Account" onPress={() => doRegister()}/>
         </View>
     );
 }

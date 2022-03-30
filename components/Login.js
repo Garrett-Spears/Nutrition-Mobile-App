@@ -63,8 +63,8 @@ function Login(props)
         secureTextEntry={true}
         onChangeText={(text) => setPassword(text)} 
       />
-      <Button title="Login" onPress={() => doLogin()}/>
       <Text>{message}</Text>
+      <Button title="Login" onPress={() => doLogin()}/>
     </View>
    );
 };

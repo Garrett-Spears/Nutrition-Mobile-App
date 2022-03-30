@@ -5,7 +5,7 @@ function LoginTitle()
 {
    return(
     <View id="loginTitleView">
-      <Text id="title">Please Log In</Text>
+      <Text>Please Log In</Text>
     </View>
    );
 };
