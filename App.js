@@ -6,12 +6,6 @@ import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 import ResetPasswordRequestScreen from './screens/ResetPasswordRequestScreen';
 import RegisterScreen from './screens/RegisterScreen';
-<<<<<<< HEAD
-import ProfileScreen from './screens/ProfileScreen';
-import GoalsScreen from './screens/GoalsScreen';
-import DailyConsumptionScreen from './screens/DailyConsumptionScreen';
-=======
->>>>>>> 0d04c5f56d2481d64ef5a68720b6081d2668bf46
 
 export default class App extends React.Component {
   render() {
@@ -42,28 +36,6 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       //header: null // Will hide header for register screen
     }
-<<<<<<< HEAD
-  },
-  Profile: {
-    screen: ProfileScreen,
-    navigationOptions: {
-      //header: null // Will hide header for register screen
-    },
-  Goals: {
-    screen: GoalsScreen,
-    navigationOptions: {
-      //header: null // Will hide header for register screen
-    }
-  },
-  AddToDailyConsumption: {
-    screen: DailyConsumptionScreen,
-    navigationOptions: {
-      //header: null // Will hide header for register screen
-    }
-  }
-
-=======
->>>>>>> 0d04c5f56d2481d64ef5a68720b6081d2668bf46
   }
 },{
   initialRouteName: "Login"
