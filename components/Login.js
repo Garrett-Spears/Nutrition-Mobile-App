@@ -44,6 +44,9 @@ function Login(props)
           global.lastName = res.lastName;
           global.userId = res.UserId;
 
+          // Store the user's jwt token
+          global.token = res.jwtToken;
+
           // Clear any possible login error message
           setMessage("");
 
