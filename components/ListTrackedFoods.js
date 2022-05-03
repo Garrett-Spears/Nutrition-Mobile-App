@@ -3,24 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button, View, Text, Fragment, TextInput } from 'react-native';
 import NutritionInfoPopup from './NutritionInfoPopup.js';
 
-/*function useOutsideAlerter(ref, setEditFoodId) 
-{
-    useEffect(() => {
-      //Alert if clicked on outside of edit quantity text box
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-            setEditFoodId(-1);
-        }
-      }
-      // Bind the event listener
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-}*/
-
 function ListTrackedFoods(props)
 {
     const [editFoodId, setEditFoodId] = useState(-1);

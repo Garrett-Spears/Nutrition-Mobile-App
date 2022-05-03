@@ -1,11 +1,12 @@
 // OgName: CardScreen.js
 import React, { Fragment, useState, useEffect } from 'react';
 // React Native does not have html components so need these
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, ScrollView } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Main from '../components/Main';
 import NavigationBar from '../components/NavigationBar';
 import ListTrackedFoods from '../components/ListTrackedFoods.js';
+import DailyCharts from '../components/DailyCharts.js';
 
 // Professor's Code Commented Out
 // Using Functional Components for now since they're simpler
@@ -153,13 +154,18 @@ function MainScreen(props)
     <Fragment>
       <Main appNavigator={props.navigation} />
       <NavigationBar appNavigator={props.navigation}/>
-      <View style={{ justifyContent: "center", flexDirection: 'row' }}>
-        <Button title="Previous" onPress={decrementDay}/>
-        <Text>{selectedDate.toDateString()}</Text>
-        <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
-      </View>
-      {show && <ListTrackedFoods foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
-      <Text>{message}{message.length > 0 && "\n"}</Text>
+      <ScrollView>
+        <View style={{ justifyContent: "center", flexDirection: 'row' }}>
+            <Button title="Previous" onPress={decrementDay}/>
+            <Text>{selectedDate.toDateString()}</Text>
+            <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
+        </View>
+
+        {show && <ListTrackedFoods foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
+        <Text>{message}{message.length > 0 && "\n"}</Text>
+
+        {show && <DailyCharts foods={foods} />}
+      </ScrollView>
     </Fragment>
    );
 };
@@ -167,7 +173,6 @@ export default MainScreen;
 
 /*<NavigationBar />
 
-{show && <ListTrackedFoods foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
 <Button variant='primary' className='m-3' href="/Main/AddToDailyConsumption" > Add To Your Daily Consumption </Button><br/><br/><br/>
 
 {show && <DailyCharts foods={foods} />}*/

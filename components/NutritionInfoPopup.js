@@ -116,7 +116,7 @@ function NutritionInfoPopup(props)
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View >
-                            <Text>Name</Text>
+                            <Text>{name}</Text>
                             <Text>Calories: {calories}</Text>
                             <Text>Protein: {protein}g</Text>
                             <Text>Carbs: {carbs}g</Text>
