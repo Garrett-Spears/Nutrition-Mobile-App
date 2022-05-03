@@ -6,6 +6,8 @@ import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 import ResetPasswordRequestScreen from './screens/ResetPasswordRequestScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import GoalsEdit from "./screens/GoalsEdit";
 
 export default class App extends React.Component {
   render() {
@@ -36,7 +38,20 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       //header: null // Will hide header for register screen
     }
+  },
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      //header: null // Will hide header for register screen
+    }
+  },
+  GoalsEdit: {
+    screen: GoalsEdit,
+    navigationOptions: {
+      //header: null // Will hide header for register screen
+    }
   }
+
 },{
   initialRouteName: "Login"
 });

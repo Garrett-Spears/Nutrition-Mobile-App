@@ -30,9 +30,9 @@ function NavigationBar(props)
             return;
         }
     }
-    function goToGoals(){
+    function goToWeight(){
         try{                
-            props.appNavigator.navigate("Goals");
+            props.appNavigator.navigate("Weight");
         }
         catch(e){
             console.log(e.toString());
@@ -44,7 +44,7 @@ function NavigationBar(props)
         <View style = {{justifyContent: "center", flexDirection: 'row'}}>
             <Button title="Home" onPress={() => goToHome()}/>
             <Button title="Profile" onPress={() => goToProfile()}/>
-            <Button title="Goals" onPress={() => goToGoals()}/>
+            <Button title="Weight" onPress={() => goToWeight()}/>
             <Button title="Log Out" onPress={() => doLogout()}/>        
         </View>
     );

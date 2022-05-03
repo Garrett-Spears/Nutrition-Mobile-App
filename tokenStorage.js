@@ -1,6 +1,6 @@
 exports.storeToken = function ( tok ){
     try{
-      global.userId = tok;
+      global.token = tok;
     }
     catch(e){
       console.log(e.message);
@@ -9,7 +9,7 @@ exports.storeToken = function ( tok ){
 exports.retrieveToken = function (){
     var ud;
     try{
-      ud = global.userId;
+      ud = global.token;
     }
     catch(e){
       console.log(e.message);
