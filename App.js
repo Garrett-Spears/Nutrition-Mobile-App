@@ -8,6 +8,7 @@ import ResetPasswordRequestScreen from './screens/ResetPasswordRequestScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import GoalsEdit from "./screens/GoalsEdit";
+import WeightScreen from "./screens/WeightScreen";
 
 export default class App extends React.Component {
   render() {
@@ -47,6 +48,12 @@ const AppNavigator = createStackNavigator({
   },
   GoalsEdit: {
     screen: GoalsEdit,
+    navigationOptions: {
+      //header: null // Will hide header for register screen
+    }
+  },
+  Weight: {
+    screen: WeightScreen,
     navigationOptions: {
       //header: null // Will hide header for register screen
     }

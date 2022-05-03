@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Button, Text, View } from 'react-native';
-import NavigationBar from './NavigationBar.js';
 
 function GoalsDisplay(props) 
 {
@@ -34,7 +33,7 @@ function GoalsDisplay(props)
                 setMessage('');
             }
 
-            setGoals(res.goal);// = res.goal;
+            setGoals(res.goal);
             //console.log(goals);
             
         }

@@ -3,14 +3,14 @@ import { Button, View, Text } from 'react-native';
 import NavigationBar from '../components/NavigationBar';
 import WeightDisplay from '../components/WeightDisplay';
 
-function ProgressPage(props)
+function WeightScreen(props)
 {   
     return(
         <Fragment>
             <NavigationBar appNavigator={props.navigation}/>
-            <WeightDisplay appNavigator={props.navigation}/>
+            <WeightDisplay/>
         </Fragment>
     );
 };
 
-export default ProgressPage;
+export default WeightScreen;
