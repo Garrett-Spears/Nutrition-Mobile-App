@@ -3,7 +3,6 @@ import React, { Fragment, useState, useEffect } from 'react';
 // React Native does not have html components so need these
 import { Button, View, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import MainTitle from '../components/MainTitle';
 import Main from '../components/Main';
 import NavigationBar from '../components/NavigationBar';
 // Professor's Code Commented Out

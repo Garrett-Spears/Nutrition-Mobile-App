@@ -9,12 +9,12 @@ function NavigationBar(props)
 		global.firstName = null;
         global.lastName = null;
         global.userId = null;
-		props.navigation.navigate("Login");
+		props.appNavigator.navigate("Login");
 	};    
 
     function goToHome(){
         try{                
-            props.navigation.navigate("Home");
+            props.appNavigator.navigate("Home");
         }
         catch(e){
             console.log(e.toString());
@@ -23,7 +23,7 @@ function NavigationBar(props)
     }
     function goToProfile(){
         try{                
-            props.navigation.navigate("Profile");
+            props.appNavigator.navigate("Profile");
         }
         catch(e){
             console.log(e.toString());
@@ -32,7 +32,7 @@ function NavigationBar(props)
     }
     function goToGoals(){
         try{                
-            props.navigation.navigate("Goals");
+            props.appNavigator.navigate("Goals");
         }
         catch(e){
             console.log(e.toString());
@@ -45,7 +45,7 @@ function NavigationBar(props)
             <Button title="Home" onPress={() => goToHome()}/>
             <Button title="Profile" onPress={() => goToProfile()}/>
             <Button title="Goals" onPress={() => goToGoals()}/>
-            <Button title="Log Out" onPress={() => props.appNavigator.navigate("Login")}/>        
+            <Button title="Log Out" onPress={() => doLogout()}/>        
         </View>
     );
 };
