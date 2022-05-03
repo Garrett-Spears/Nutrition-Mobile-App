@@ -7,8 +7,6 @@ global.lastName = "";
 
 function Login(props)
 {
-  var storage = require('../tokenStorage.js');
-  
   // These will retrieve the user and pass to send to the api
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -28,29 +26,32 @@ function Login(props)
       const response = await fetch(bp.buildPath("api/login"),{method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
       var res = JSON.parse(await response.text());
       
-      if( res.UserId <= 0 )
+      if( res.error.length > 0 )
       {
           // Unsucessful login attempt
           setMessage(res.error);
       }
-      else{          
-        if (!res.jwtToken){
-            setMessage(res.error);
-            return;
-        }
-        
-        storage.storeToken(res.jwtToken);
-        
-        // Store the user's info as global variables
-        global.firstName = res.FirstName;
-        global.lastName = res.lastName;
-        global.userId = res.UserId;
+      else
+      {          
+        if (!res.jwtToken)
+          {
+              setMessage(res.error);
+              return;
+          }
 
-        // Clear any possible login error message
-        setMessage("");
+          // Store the user's info as global variables
+          global.firstName = res.FirstName;
+          global.lastName = res.lastName;
+          global.userId = res.UserId;
 
-        // Route the user to the home page of the app
-        props.appNavigator.navigate("Home");
+          // Store the user's jwt token
+          global.token = res.jwtToken;
+
+          // Clear any possible login error message
+          setMessage("");
+
+          // Route the user to the home page of the app
+          props.appNavigator.navigate("Home");
       }
     }
     catch(e)

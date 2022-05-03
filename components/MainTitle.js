@@ -6,6 +6,7 @@ function MainTitle()
 {
    return(
     <View id="mainTitleView">
+      <Text id="title">Main Page</Text>
     </View>
    );
 };
