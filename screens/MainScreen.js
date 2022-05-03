@@ -157,7 +157,7 @@ function MainScreen(props)
       <ScrollView>
         <View style={{ justifyContent: "center", flexDirection: 'row' }}>
             <Button title="Previous" onPress={decrementDay}/>
-            <Text>{selectedDate.toDateString()}</Text>
+            <Text style ={{paddingVertical : 10}}>{selectedDate.toDateString()}</Text>
             <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
         </View>
 

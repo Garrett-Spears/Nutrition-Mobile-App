@@ -132,7 +132,7 @@ function DailyCharts(props)
   return (
     <View>
         {totalNutrtionInfo !== null && goals != null &&
-        <View>
+        <View style ={{paddingHorizontal : 95}}>
             <Text>Progress toward Daily Goals</Text>
             <Text>Calories: </Text><Progress.Bar progress={totalNutrtionInfo.TotalCalories / goals.Calories} width={200} height={19}>
                 <Text style={{alignSelf:"center", position:"absolute",top:0.5}}>{totalNutrtionInfo.TotalCalories}/{goals.Calories} kcal</Text>
@@ -160,8 +160,9 @@ function DailyCharts(props)
             </Progress.Bar>
         </View>}
         <View>
-            <Text>Macro Breakdown</Text>
-            {pieData !== null && <VictoryPie data={pieData} labels={({ datum }) => datum.x }/>}
+            <Text style ={{paddingVertical : 10}}></Text>
+            <Text style ={{paddingHorizontal : 5}}>Macro Breakdown</Text>
+            {pieData !== null && <VictoryPie labelRadius = {50} colorScale={["tomato", "orange", "gold" ]} labelPlacement = {"parallel"} data={pieData} labels={({ datum }) => datum.x }/>}
         </View>
     </View>
   );

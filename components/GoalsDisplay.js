@@ -71,15 +71,15 @@ function GoalsDisplay(props)
     <Fragment>
     <View style = {style}>
         <Text>{firstName} {lastName}'s Current Goals</Text>
-        <Text>Weight: {goals.Weight}</Text>
-        <Text>Calories: {goals.Calories}</Text>
-        <Text>Protein: {goals.Protein}</Text>
-        <Text>Carbohydrates: {goals.Carbohydrates}</Text>
-        <Text>Fat: {goals.Fat}</Text>
-        <Text>Fiber: {goals.Fiber}</Text>
-        <Text>Sugar: {goals.Sugar}</Text>
-        <Text>Sodium: {goals.Sodium}</Text>
-        <Text>Cholesterol: {goals.Cholesterol}</Text>
+        <Text>Weight: {goals.Weight}lbs</Text>
+        <Text>Calories: {goals.Calories}g</Text>
+        <Text>Protein: {goals.Protein}g</Text>
+        <Text>Carbohydrates: {goals.Carbohydrates}g</Text>
+        <Text>Fat: {goals.Fat}g</Text>
+        <Text>Fiber: {goals.Fiber}g</Text>
+        <Text>Sugar: {goals.Sugar}g</Text>
+        <Text>Sodium: {goals.Sodium}mg</Text>
+        <Text>Cholesterol: {goals.Cholesterol}mg</Text>
     </View>
     <Button title = "Set New Goals" onPress={() => goToGoalsEdit()}/>  
     </Fragment>

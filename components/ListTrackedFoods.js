@@ -209,12 +209,12 @@ function ListTrackedFoods(props)
     return(
     <View>
         {props.foods.map(food => (
-            <View key={food._id} style={{ flexDirection: 'row' }}>
-                <Text>{food.Name}</Text>
-                {(editFoodId !== food._id) ? <Text onPress={() => handleOpeningInput(food._id, food.Quantity)}> {food.Quantity} </Text> 
+            <View key={food._id} style={{ flexDirection: 'row' , paddingVertical : 5, borderStyle: "solid", borderWidth:2, margin:2}}>
+                <Text style ={{paddingVertical : 10}}>{food.Name}</Text>
+                {(editFoodId !== food._id) ? <Text style ={{paddingVertical : 10}} onPress={() => handleOpeningInput(food._id, food.Quantity)}> {food.Quantity} </Text> 
                                                 : <View><TextInput keyboardType='numeric' placeholder={food.Quantity + ''} defaultValue={food.Quantity + ''} autoFocus={true} onChangeText={(text) => setInputQty(text)} /><Button title="Save" onPress={() => doUpdateQuantity(food._id)} /><Button title="Cancel" onPress={() => setEditFoodId(-1)} /></View>}
-                <Text>{food.Quantity * food.Calories}</Text>
-                <Text>{mealValues[food.Category]}</Text>
+                <Text style ={{paddingVertical : 10, paddingHorizontal: 5}}>{food.Quantity * food.Calories}kcals</Text>
+                <Text style ={{paddingVertical : 10}}>{mealValues[food.Category]}</Text>
                 <Button title="View" onPress={() => showInfoPopup(food)} />
                 <Button title="Untrack" onPress={() => doUntrackFood(food._id)} />
             </View>

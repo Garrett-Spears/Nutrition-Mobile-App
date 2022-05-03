@@ -88,7 +88,7 @@ function WeightDisplay()
 
     return (
         <View>
-            <Text> Current Weight: {weights} lbs</Text>  
+            <Text> Current Weight: {weights}lbs</Text>  
             <TextInput 
                 placeholder="Weight" 
                 onChangeText={(text) => setW(text)} 
