@@ -3,15 +3,14 @@ import NavigationBar from '../components/NavigationBar.js';
 import AddToDailyConsumption from '../components/AddToDailyConsumption.js';
 import { Button, View, Text } from 'react-native';
 
-function AddToDailyConsumptionPage(props)
+function AddToDailyConsumptionScreen(props)
 {
     
     return(
         <Fragment>
             <NavigationBar appNavigator={props.navigation}/>
-            <AddToDailyConsumption appNavigator={props.navigation}/>
         </Fragment>
     );
 };
 
-export default AddToDailyConsumptionPage;
+export default AddToDailyConsumptionScreen;

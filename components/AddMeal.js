@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { Button, View, Text, Fragment, TextInput, StyleSheet } from 'react-native';
+
 
 function AddMeal() 
 {
     // Initialize fields required for object, get user data, and create message variable
-    var _ud = localStorage.getItem('user_data');
-	var ud = JSON.parse(_ud);
-    var userId = ud.id;
-    var foodName;
-    var calories;
-    var protein;
-    var carbs;
-    var fat;
-    var fiber;
-    var sugar; 
-    var sodium;
-    var cholesterol;
+    var userId = global.userId;
+    
+    const [name, setName] = useState('');
+    const [calories, setCalories] = useState('');
+    const [protein, setProtein] = useState('');
+    const [carbs, setCarbs] = useState('');
+    const [fat, setFat] = useState('');
+    const [fiber, setFiber] = useState('');
+    const [sugar, setSugar] = useState('');
+    const [sodium, setSodium] = useState('');
+    const [cholesterol, setCholesterol] = useState('');
     const [message,setMessage] = useState('');
 
     var storage = require('../tokenStorage.js');
@@ -25,23 +26,21 @@ function AddMeal()
         setMessage("");
     }
 
-    const doAddMeal = async event => 
+    async function doAddMeal() 
     {
         // create object from text boxes and make JSON 
-        event.preventDefault();
-
         var tok = storage.retrieveToken();
 
         var obj = { UserId:userId, 
-                    Name:foodName.value, 
-                    Calories:calories.value, 
-                    Protein:(protein.value || 0), 
-                    Carbs:(carbs.value || 0), 
-                    Fat:(fat.value || 0), 
-                    Fiber:(fiber.value || 0), 
-                    Sugar:(sugar.value || 0), 
-                    Sodium:(sodium.value || 0), 
-                    Cholesterol:(cholesterol.value || 0),
+                    Name:name, 
+                    Calories:calories, 
+                    Protein:protein, 
+                    Carbs:carbs, 
+                    Fat:fat, 
+                    Fiber:fiber, 
+                    Sugar:sugar, 
+                    Sodium:sodium, 
+                    Cholesterol:cholesterol,
                     jwtToken:tok
                 }; 
         var js = JSON.stringify(obj);
@@ -61,8 +60,12 @@ function AddMeal()
             else if (res.jwtToken.length === 0)
             {
                 alert("Your session has expired, please log in again.");
-                localStorage.removeItem("user_data")
-		        window.location.href = '/';
+                
+                global.firstName = "";
+                global.lastName = "";
+                global.userId = -1;
+
+                props.navigation.navigate("Login");
                 return;
             }
             
@@ -75,7 +78,7 @@ function AddMeal()
             }
             else
             {
-                setMessage("\"" + foodName.value + "\" successfully added to your list of foods.");
+                setMessage("\"" + name + "\" successfully added to your list of foods.");
             }
         }
         catch(e)
@@ -92,24 +95,27 @@ function AddMeal()
     }
   };
 
+  function handleChangeText(text, setFunc)
+  {
+      setFunc(text);
+      clearMessage();
+  }
+
   return (
-    <div id="addMealDiv">
-        <form onSubmit={doAddMeal}>
-            <span id="inner-title">Add Meal (required fields indicated by *)</span><br />
-            <input type="text" id="foodName" placeholder="Food Name" onInput={clearMessage} ref={(c) => foodName = c} /> *<br />
-            <input type="number" id="calories" placeholder="Calories" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => calories = c} /> *<br />
-            <input type="number" id="protein" placeholder="Protein (g)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => protein = c} /><br />
-            <input type="number" id="carbs" placeholder="Carbohydrates (g)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => carbs = c} /><br />
-            <input type="number" id="fat" placeholder="Fat (g)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => fat = c} /><br />
-            <input type="number" id="fiber" placeholder="Fiber (g)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => fiber = c} /><br />
-            <input type="number" id="sugar" placeholder="Sugar (g)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => sugar = c} /><br />
-            <input type="number" id="sodium" placeholder="Sodium (mg)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => sodium = c} /><br />
-            <input type="number" id="cholesterol" placeholder="Cholesterol (mg)" min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => cholesterol = c} /><br />
-            <input type="submit" id="addMealButton" class="buttons" value = "Add Meal" onClick={doAddMeal} /><br />
-            <span id="addMealResult">{message}</span>
-        </form>
-     </div>
+    <View>
+        <Text>Add Meal (required fields indicated by *){"\n"}</Text>
+        <TextInput placeholder="Food Name" onChangeText={(text) => handleChangeText(text, setName)} /><Text> *{"\n"}</Text>
+        <TextInput placeholder="Calories" onChangeText={(text) => handleChangeText(text, setCalories)} /><Text> *{"\n"}</Text>
+        <TextInput placeholder="Protein (g)" onChangeText={(text) => handleChangeText(text, setProtein)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Carbohydrates (g)" onChangeText={(text) => handleChangeText(text, setCarbs)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Fat (g)" onChangeText={(text) => handleChangeText(text, setFat)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Fiber (g)" onChangeText={(text) => handleChangeText(text, setFiber)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Sugar (g)" onChangeText={(text) => handleChangeText(text, setSugar)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Sodium (mg)" onChangeText={(text) => handleChangeText(text, setSodium)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Cholesterol (mg)" onChangeText={(text) => handleChangeText(text, setCholesterol)} /><Text>{"\n"}</Text>
+        <Button title="Add Food " onPress={doAddMeal} /><Text>{"\n"}</Text>
+        <Text>{message}</Text>
+     </View>
   );
 };
-
 export default AddMeal;

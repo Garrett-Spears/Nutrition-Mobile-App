@@ -167,29 +167,3 @@ function DailyCharts(props)
   );
 };
 export default DailyCharts;
-/*<Row>
-            <Col style={{width: '100vh'}}>
-                <Container style={{height:'70vh', width:'70vh', marginBottom:'5%'}} >
-                    <Doughnut data={data} options={options} plugins={[ChartDataLabels]} />
-                </Container>
-            </Col>
-            <Col style={{width: '100vh'}}>
-                <Container style={{height:'80%', width:'100%', marginBottom:'5%'}}>
-                    <span style={{fontSize:'30px'}}>Progress toward Daily Goals</span>
-                    {goals !== null && totalNutrtionInfo !== null &&
-                        <div style={{position:'relative', top:'50%', transform:'translateY(-50%)'}}>
-                        <Col>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Calories: {totalNutrtionInfo.TotalCalories}/{goals.Calories} kcal</span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalCalories / goals.Calories * 100)} label={`${Math.round(totalNutrtionInfo.TotalCalories / goals.Calories * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Protein: {totalNutrtionInfo.TotalProtein}/{goals.Protein}g </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalProtein / goals.Protein * 100)} label={`${Math.round(totalNutrtionInfo.TotalProtein / goals.Protein * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Carbs: {totalNutrtionInfo.TotalCarbs}/{goals.Carbs}g </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalCarbs / goals.Carbs * 100)} label={`${Math.round(totalNutrtionInfo.TotalCarbs / goals.Carbs * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Fat: {totalNutrtionInfo.TotalFat}/{goals.Fat}g </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalFat / goals.Fat * 100)} label={`${Math.round(totalNutrtionInfo.TotalFat / goals.Fat * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Fiber: {totalNutrtionInfo.TotalFiber}/{goals.Fiber}g </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalFiber / goals.Fiber * 100)} label={`${Math.round(totalNutrtionInfo.TotalFiber / goals.Fiber * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Sugar: {totalNutrtionInfo.TotalSugar}/{goals.Sugar} g </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalSugar / goals.Sugar * 100)} label={`${Math.round(totalNutrtionInfo.TotalSugar / goals.Sugar * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Sodium: {totalNutrtionInfo.TotalSodium}/{goals.Sodium} mg </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalSodium / goals.Sodium * 100)} label={`${Math.round(totalNutrtionInfo.TotalSodium / goals.Sodium * 100)}%`} /></div>
-                            <div style={{marginBottom:'4%', display:'flex', alignItems:'center'}}><span style={{width:'27%', float:'left', textAlign:'right', marginRight:'1vh'}}>Cholesterol: {totalNutrtionInfo.TotalCholesterol}/{goals.Cholesterol} mg </span><ProgressBar style={{height:'3vh', width:'73%', float:'right'}} animated='true' now={Math.round(totalNutrtionInfo.TotalCholesterol / goals.Cholesterol * 100)} label={`${Math.round(totalNutrtionInfo.TotalCholesterol / goals.Cholesterol * 100)}%`} /></div>
-                        </Col>
-                        </div>
-                    }
-                </Container>
-            </Col>
-        </Row>*/

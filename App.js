@@ -4,7 +4,9 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
+import AddToDailyConsumptionScreen from './screens/AddToDailyConsumptionScreen';
 import ResetPasswordRequestScreen from './screens/ResetPasswordRequestScreen';
+import CreateMealScreen from './screens/CreateMealScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import GoalsEdit from "./screens/GoalsEdit";
@@ -38,6 +40,18 @@ const AppNavigator = createStackNavigator({
     screen: RegisterScreen,
     navigationOptions: {
       //header: null // Will hide header for register screen
+    }
+  },
+  AddToDailyConsumption: {
+    screen: AddToDailyConsumptionScreen,
+    navigationOptions: {
+      //header: null // Will hide header for main screen
+    }
+  },
+  CreateMeal: {
+    screen: CreateMealScreen,
+    navigationOptions: {
+      //header: null // Will hide header for main screen
     }
   },
   Profile: {

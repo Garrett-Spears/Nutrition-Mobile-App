@@ -163,6 +163,7 @@ function MainScreen(props)
 
         {show && <ListTrackedFoods foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
         <Text>{message}{message.length > 0 && "\n"}</Text>
+        <Button title="Add To Your Daily Consumption" onPress={() => props.navigation.navigate("AddToDailyConsumption")}></Button>
 
         {show && <DailyCharts foods={foods} />}
       </ScrollView>
@@ -170,9 +171,3 @@ function MainScreen(props)
    );
 };
 export default MainScreen;
-
-/*<NavigationBar />
-
-<Button variant='primary' className='m-3' href="/Main/AddToDailyConsumption" > Add To Your Daily Consumption </Button><br/><br/><br/>
-
-{show && <DailyCharts foods={foods} />}*/

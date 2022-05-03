@@ -3,7 +3,7 @@ import YourFood from './YourFood.js';
 import UsdaFood from './UsdaFood.js';
 import { Button, View, Text } from 'react-native';
 
-function AddToDailyConsumption()
+function AddToDailyConsumption(props)
 {
     const [displayYourFood, setDisplayYourFood] = useState(true);
     const [toggleString, setToggleString] = useState("Switch to Recommended Foods");
@@ -27,14 +27,15 @@ function AddToDailyConsumption()
       
     return(
         <View>
-            <Text>Search for meals to add to you list of foods consumed today.\n</Text>
-            <Button id="switchSearchState" class="buttons" onClick={switchSearchState}>{toggleString}</Button>
+            <Text>Search for meals to add to your list of foods consumed today.{"\n"}</Text>
+            <Button title={toggleString} onPress={switchSearchState} />
 
-            {displayYourFood && <YourFood />}
-            {!displayYourFood && <UsdaFood />}
 
             <Button title="Create Meal" onPress={() => goToCreateMealPage()}/>
         </View>
     );
 };
 export default AddToDailyConsumption;
+
+/*{displayYourFood && <YourFood />}
+            {!displayYourFood && <UsdaFood />}*/
