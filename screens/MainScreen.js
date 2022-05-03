@@ -143,11 +143,15 @@ function MainScreen(props)
       }
   }
 
+  function goToAddToDailyConsumptionPage()
+  {
+    props.navigation.navigate("AddToDailyConsumption");
+  }
+
   // Initialize list of trackedfoods on page when page first renders
   useEffect(() => {
       doRetrieveTrackedFoods(selectedDate);
   }, []);
-
 
    return(
     // Need to have fragment in react native to call multiple components
@@ -161,9 +165,9 @@ function MainScreen(props)
             <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
         </View>
 
+        <Button title="Refresh List" onPress={() => doRetrieveTrackedFoods(selectedDate)}/>
         {show && <ListTrackedFoods appNavigator={props.navigation} foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
         <Text>{message}{message.length > 0 && "\n"}</Text>
-        <Button title="Add To Your Daily Consumption" onPress={() => props.navigation.navigate("AddToDailyConsumption")}></Button>
 
         {show && <DailyCharts appNavigator={props.navigation} foods={foods} />}
       </ScrollView>
@@ -171,3 +175,5 @@ function MainScreen(props)
    );
 };
 export default MainScreen;
+
+//<Button title="Add To Your Daily Consumption" onPress={() => goToAddToDailyConsumptionPage()}></Button>

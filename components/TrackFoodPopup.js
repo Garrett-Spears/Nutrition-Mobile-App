@@ -67,7 +67,7 @@ function TrackFoodPopup(props)
         // Invalid number typed in
         if (decimalCount >= 2 || (decimalCount === 1 && newQty.length === 1))
         {
-            props.setMessage("Please enter a valid number.");
+            setMessage("Please enter a valid number.");
             return;
         }
 
@@ -76,7 +76,7 @@ function TrackFoodPopup(props)
         // Invalid quanitity so don't do anything
         if (newQty <= 0)
         {
-            props.setMessage("Please enter a quantity greater than 0.");
+            setMessage("Please enter a quantity greater than 0.");
             return;
         }
 
@@ -106,9 +106,7 @@ function TrackFoodPopup(props)
             jwtToken:tok
         }
         var js = JSON.stringify(obj);
-        console.log(obj);
-        return;
-
+  
         try
         {   
             
@@ -201,7 +199,6 @@ function TrackFoodPopup(props)
           backgroundColor: "white",
           borderRadius: 20,
           padding: 35,
-          alignItems: "center",
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
@@ -237,7 +234,7 @@ function TrackFoodPopup(props)
       return (
         <View style={styles.centeredView}>
             <Modal isVisible={props.show}>
-              <View style={styles.centeredView}>
+              <View >
                   <View style={styles.modalView}>
                       <Text>{name}</Text>
                       <Text>Calories: {calories * quantity}</Text>
@@ -250,7 +247,7 @@ function TrackFoodPopup(props)
                       <Text>Cholesterol: {cholesterol * quantity}</Text>
                       {showServing && <Text>{servingLabel}</Text>}
                       <Text>Quantity: </Text>
-                      <ScrollView keyboardShouldPersistTaps="never"><TextInput keyboardType='numeric' onSubmitEditing={Keyboard.dismiss}cplaceholder="1" defaultValue="1" onChangeText = {(text) => handleQuantityChange(text)}></TextInput></ScrollView>
+                      <TextInput keyboardType='numeric' returnKeyType='done' onSubmitEditing={Keyboard.dismiss}cplaceholder="1" defaultValue="1" onChangeText = {(text) => handleQuantityChange(text)}></TextInput>
                       <Text>Choose meal (Optional):</Text>
                       <Picker selectedValue={category} onValueChange={(e) => handlePickerChange(e)}>
                         <Picker.Item value="0" label=""/>

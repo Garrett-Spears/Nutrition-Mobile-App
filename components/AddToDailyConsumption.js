@@ -34,6 +34,7 @@ function AddToDailyConsumption(props)
             {!displayYourFood && <UsdaFood appNavigator={props.appNavigator}/> && false}
 
             <Button title="Create Meal" onPress={() => goToCreateMealPage()}/>
+            <Text>{"\n\n"}</Text>
         </View>
     );
 };

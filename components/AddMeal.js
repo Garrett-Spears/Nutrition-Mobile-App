@@ -104,15 +104,15 @@ function AddMeal()
   return (
     <View>
         <Text>Add Meal (required fields indicated by *){"\n"}</Text>
-        <TextInput placeholder="Food Name" onChangeText={(text) => handleChangeText(text, setName)} /><Text> *{"\n"}</Text>
-        <TextInput placeholder="Calories" onChangeText={(text) => handleChangeText(text, setCalories)} /><Text> *{"\n"}</Text>
-        <TextInput placeholder="Protein (g)" onChangeText={(text) => handleChangeText(text, setProtein)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Carbohydrates (g)" onChangeText={(text) => handleChangeText(text, setCarbs)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Fat (g)" onChangeText={(text) => handleChangeText(text, setFat)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Fiber (g)" onChangeText={(text) => handleChangeText(text, setFiber)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Sugar (g)" onChangeText={(text) => handleChangeText(text, setSugar)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Sodium (mg)" onChangeText={(text) => handleChangeText(text, setSodium)} /><Text>{"\n"}</Text>
-        <TextInput placeholder="Cholesterol (mg)" onChangeText={(text) => handleChangeText(text, setCholesterol)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Food Name" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setName)} /><Text> *{"\n"}</Text>
+        <TextInput placeholder="Calories" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setCalories)} /><Text> *{"\n"}</Text>
+        <TextInput placeholder="Protein (g)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setProtein)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Carbohydrates (g)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setCarbs)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Fat (g)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setFat)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Fiber (g)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setFiber)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Sugar (g)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setSugar)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Sodium (mg)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setSodium)} /><Text>{"\n"}</Text>
+        <TextInput placeholder="Cholesterol (mg)" returnKeyType='done' onChangeText={(text) => handleChangeText(text, setCholesterol)} /><Text>{"\n"}</Text>
         <Button title="Add Food " onPress={doAddMeal} /><Text>{"\n"}</Text>
         <Text>{message}</Text>
      </View>

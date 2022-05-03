@@ -1,27 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button, View, Text, StyleSheet, Keyboard } from 'react-native';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import Modal from "react-native-modal";
 
 function EditNutritionInfoPopup(props)
 {   
-    const [message,setMessage] = useState('');
     const [didEditFood, setDidEditFood] = useState(false);
 
-      if (!props.show) {
+      const [name, setName] = useState('');
+      const [calories, setCalories] = useState(-1);
+      const [protein, setProtein] = useState(-1);
+      const [carbs, setCarbs] = useState(-1);
+      const [fat, setFat] = useState(-1);
+      const [fiber, setFiber] = useState(-1);
+      const [sugar, setSugar] = useState(-1);
+      const [sodium, setSodium] = useState(-1);
+      const [cholesterol, setCholesterol] = useState(-1);
+      const [message,setMessage] = useState(-1);
+
+      if (!props.show)
         return null;
-      }
-    
-      var food = props.food;
-      var name, calories, protein, carbs, fat, fiber, sugar, sodium, cholesterol;
       
       // Get all the nutritional values from the selected food
-      name = food.Name;
-      calories = food.Calories;
-      protein = food.Protein;
-      carbs = food.Carbs;
-      fat = food.Fat;
-      fiber = food.Fiber;
-      sugar = food.Sugar;
-      sodium = food.Sodium;
-      cholesterol = food.Cholesterol;
+      var nameD, caloriesD, proteinD, carbsD, fatD, fiberD, sugarD, sodiumD, cholesterolD;
+      var food = props.food;
+      
+      // Get all the nutritional values from the selected food
+      userId = global.userId;
+      nameD = food.Name;
+      caloriesD = food.Calories;
+      proteinD = food.Protein;
+      carbsD = food.Carbs;
+      fatD = food.Fat;
+      fiberD = food.Fiber;
+      sugarD = food.Sugar;
+      sodiumD = food.Sodium;
+      cholesterolD = food.Cholesterol;
 
       // This function just resets the displayed message whenever the user starts typing again in any of the input text boxes.
       function clearMessage()
@@ -101,23 +115,78 @@ function EditNutritionInfoPopup(props)
         }
       };
 
+      function handleChangeText(text, setFunc)
+      {
+          setFunc(text);
+          clearMessage();
+      }
+
+      const styles = StyleSheet.create({
+        centeredView: {
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 22
+        },
+        modalView: {
+          margin: 20,
+          backgroundColor: "white",
+          borderRadius: 20,
+          padding: 35,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+          elevation: 5
+        },
+        button: {
+          borderRadius: 20,
+          padding: 10,
+          elevation: 2
+        },
+        buttonOpen: {
+          backgroundColor: "#F194FF",
+        },
+        buttonClose: {
+          backgroundColor: "#2196F3",
+        },
+        textStyle: {
+          color: "white",
+          fontWeight: "bold",
+          textAlign: "center"
+        },
+        modalText: {
+          marginBottom: 15,
+          textAlign: "center"
+        }
+      });
+
+      console.log(caloriesD);
+
       return (
-        <div id="editNutritionInfoPopup">
-            <div id="innerEditNutritionInfoPopup">
-                <span>Name: </span><input type="text" defaultValue={name} onInput={clearMessage} ref={(c) => name = c} /> <br />
-                <span>Calories: </span><input type="number" defaultValue={calories} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => calories = c} /> <br />
-                <span>Protein: </span><input type="number" defaultValue={protein} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => protein = c} /> <br />
-                <span>Carbohydrates: </span><input type="number" defaultValue={carbs} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => carbs = c} /> <br />
-                <span>Fat: </span><input type="number" defaultValue={fat} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => fat = c} /> <br />
-                <span>Fiber: </span><input type="number" defaultValue={fiber} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => fiber = c} /> <br />
-                <span>Sugar: </span><input type="number" defaultValue={sugar} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => sugar = c} /> <br />
-                <span>Sodium: </span><input type="number" defaultValue={sodium} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => sodium = c} /> <br />
-                <span>Cholesterol: </span><input type="number" defaultValue={cholesterol} min="0" onKeyPress={preventInvalid} onInput={clearMessage} ref={(c) => cholesterol = c} /> <br />
-                <button type="button" id="editNutritionInfoButton" class="buttons" onClick={doEditNutritionInfo}> Edit Nutrition Info </button>
-                <button type="button" id="closeEditNutritionInfoPopupButton" class="buttons" onClick={()=>props.closePopup(didEditFood, setDidEditFood, setMessage)}> Close Edit Nutrition Info </button> <br />
-                <span id="editNutritionInfoResult">{message}</span>
-            </div>
-        </div>
+        <View style={styles.centeredView}>
+            <Modal isVisible={props.show}>
+              <View >
+                  <View style={styles.modalView}>
+                    <View style={{ flexDirection: 'row' }}><Text>Name: </Text><TextInput defaultValue={nameD} returnKeyType='done' onChangeText={(text) => handleChangeText(text, setName)} /></View><Text> *{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Calories: </Text><TextInput defaultValue={caloriesD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setCalories)} /></View><Text> *{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Protein: </Text><TextInput defaultValue={proteinD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setProtein)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Carbs: </Text><TextInput defaultValue={carbsD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setCarbs)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Fat: </Text><TextInput defaultValue={fatD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setFat)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Fiber: </Text><TextInput defaultValue={fiberD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setFiber)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Sugar: </Text><TextInput defaultValue={sugarD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setSugar)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Sodium: </Text><TextInput defaultValue={sodiumD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setSodium)} /></View><Text>{"\n"}</Text>
+                    <View style={{ flexDirection: 'row' }}><Text>Cholesterol: </Text><TextInput defaultValue={cholesterolD} returnKeyType='done' keyboardType='numeric' onChangeText={(text) => handleChangeText(text, setCholesterol)} /></View><Text>{"\n"}</Text>
+                    <Button title="Edit" onPress={doEditNutritionInfo} /><Text>{"\n"}</Text>
+                    <Button title="Close" onPress={()=>props.closePopup(didEditFood, setDidEditFood, setMessage)} /><Text>{"\n"}</Text>
+                    <Text>{message}</Text>
+                  </View>
+              </View>
+            </Modal>
+        </View>
       );
   }
   export default EditNutritionInfoPopup;

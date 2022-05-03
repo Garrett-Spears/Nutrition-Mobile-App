@@ -212,8 +212,8 @@ function YourFood(props)
     //<TextInput  id="searchText" placeholder="Search Here" onChange = {() => doSearchFoods(searchText = c)} ref={() => searchText = c} />
     return(
         <View>
+            <Button title="Refresh List" onPress={() => doSearchFoods("")}/>
             <TextInput placeholder="Search Here" onChangeText = {(text) => doSearchFoods(text)} />
-
             <View >
                 {foods.map(food => (
                     <View key={food._id} style = {{flexDirection: "row"}}>
@@ -221,8 +221,8 @@ function YourFood(props)
                         <Text>{food.Name}</Text>
                         <Button title = "Add" onPress={() => showTrackFoodPopup(food)}/>
                         <Button title = "View" onPress={() => showInfoPopup(food)}/>
-                        <Button title = "Edit" onClick={() => showEditInfoPopup(food)}/>
-                        <Button title = "Delete" onClick={() => showDeleteFoodPopup(food)}/>
+                        <Button title = "Edit" onPress={() => showEditInfoPopup(food)}/>
+                        <Button title = "Delete" onPress={() => showDeleteFoodPopup(food)}/>
                     </View>
                 ))}
             </View>

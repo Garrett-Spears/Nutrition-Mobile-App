@@ -28,7 +28,7 @@ function DailyCharts(props)
             }
             else
             {
-                setGoals(res.goal);
+                await setGoals(res.goal);
             }
         }
         catch(e)
