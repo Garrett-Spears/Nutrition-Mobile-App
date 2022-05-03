@@ -26,13 +26,19 @@ function Login(props)
       const response = await fetch(bp.buildPath("api/login"),{method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
       var res = JSON.parse(await response.text());
       
-      if( res.UserId <= 0 )
+      if( res.error.length > 0 )
       {
           // Unsucessful login attempt
-          setMessage("The user/password combination you entered is incorrect. Please try again.");
+          setMessage(res.error);
       }
       else
       {          
+        if (!res.jwtToken)
+          {
+              setMessage(res.error);
+              return;
+          }
+
           // Store the user's info as global variables
           global.firstName = res.FirstName;
           global.lastName = res.lastName;
