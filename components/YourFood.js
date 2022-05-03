@@ -5,12 +5,11 @@ import EditNutritionInfoPopup from './EditNutritionInfoPopup.js';
 import DeleteFoodPopup from './DeleteFoodPopup.js';
 import TrackCheckedFoodsPopup from './TrackCheckedFoodsPopup.js';
 import CombineFoodsPopup from './CombineFoodsPopup.js';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-function YourFood()
+function YourFood(props)
 {
-    var searchText;
-
     // This will dynamically keep track of which food's checkboxes have been selected
     const [checkedSet, setCheckedSet] = useState(new Set());
 
@@ -130,7 +129,7 @@ function YourFood()
             checkedSet.add(mealId);
     }
 
-    async function doSearchFoods() 
+    async function doSearchFoods(searchText) 
     {
         let searchString;
 
@@ -141,11 +140,10 @@ function YourFood()
         }
         else
         {
-            searchString = searchText.value;
+            searchString = searchText;
         }
 
-        var userData = JSON.parse(localStorage.getItem('user_data'));
-        var userId = userData.id;
+        var userId = global.userId;
 
         // If search text is empty don't even pass it to the api
         let routeEnd;
@@ -208,35 +206,35 @@ function YourFood()
     
     // Initialize list of foods on page
     useEffect(() => {
-        doSearchFoods();
+        doSearchFoods("");
     }, []);
     
     //<TextInput  id="searchText" placeholder="Search Here" onChange = {() => doSearchFoods(searchText = c)} ref={() => searchText = c} />
     return(
         <View>
-            <TextInput  id="searchText" placeholder="Search Here" onChange = {doSearchFoods} ref={(c) => searchText = c} />
+            <TextInput placeholder="Search Here" onChangeText = {(text) => doSearchFoods(text)} />
 
-            <View style = {{flexDirection: "row"}}>
+            <View >
                 {foods.map(food => (
-                    <Fragment key={food._id}>
-                        <CheckBox id="selectFood" class="checkboxes" value={isSelected} onValueChange={ () => handleCheckboxChange(food.fdcId)}/>
+                    <View key={food._id} style = {{flexDirection: "row"}}>
+                        <BouncyCheckbox onPress={ () => handleCheckboxChange(food._Id)}/>
                         <Text>{food.Name}</Text>
-                        <Button id="addFoodToDailyConsumptionButton" class="buttons" title = "Add" onPress={() => showTrackFoodPopup(food)}/>
-                        <Button id="viewNutritionInfoButton" class="buttons" title = "View" onPress={() => showInfoPopup(food)}/>
-                        <Button id="editNutritionInfoButton" class="buttons" title = "Edit" onClick={() => showEditInfoPopup(food)}/>
-                        <Button id="deleteFoodButton" class="buttons" title = "Delete" onClick={() => showDeleteFoodPopup(food)}/>
-                    </Fragment>
+                        <Button title = "Add" onPress={() => showTrackFoodPopup(food)}/>
+                        <Button title = "View" onPress={() => showInfoPopup(food)}/>
+                        <Button title = "Edit" onClick={() => showEditInfoPopup(food)}/>
+                        <Button title = "Delete" onClick={() => showDeleteFoodPopup(food)}/>
+                    </View>
                 ))}
             </View>
-            <TrackFoodPopup show={trackFoodPopupState} food={selectedFoodInfo} closePopup={hideTrackFoodPopup} />
+            <TrackFoodPopup appNavigator={props.appNavigator} show={trackFoodPopupState} food={selectedFoodInfo} closePopup={hideTrackFoodPopup} />
             <NutritionInfoPopup show={nutritionInfoPopupState} food={selectedFoodInfo} closePopup={hideInfoPopup} />
-            <EditNutritionInfoPopup show={editNutritionInfoPopupState} food={selectedFoodInfo} closePopup={hideEditInfoPopup} />
-            <DeleteFoodPopup show={deleteFoodPopupState} food={selectedFoodInfo} closePopup={hideDeleteFoodPopup} />
+            <EditNutritionInfoPopup appNavigator={props.appNavigator} show={editNutritionInfoPopupState} food={selectedFoodInfo} closePopup={hideEditInfoPopup} />
+            <DeleteFoodPopup appNavigator={props.appNavigator} show={deleteFoodPopupState} food={selectedFoodInfo} closePopup={hideDeleteFoodPopup} />
 
-            <TrackCheckedFoodsPopup show={trackCheckedFoodsPopupState} foodIds={checkedSet} foods={foods} closePopup={hideTrackCheckedFoodsPopup} />
+            <TrackCheckedFoodsPopup appNavigator={props.appNavigator} show={trackCheckedFoodsPopupState} foodIds={checkedSet} foods={foods} closePopup={hideTrackCheckedFoodsPopup} />
             <Button id="trackCheckedFoodsButton" class="buttons" title = "Track Selected Foods " onPress={() => showTrackCheckedFoodsPopup()}/>
 
-            <CombineFoodsPopup show={combineFoodsPopupState} foodIds={checkedSet} foods={foods} closePopup={hideCombineFoodsPopup} />
+            <CombineFoodsPopup appNavigator={props.appNavigator} show={combineFoodsPopupState} foodIds={checkedSet} foods={foods} closePopup={hideCombineFoodsPopup} />
             <Button id="combineFoodsButton" class="buttons" title = "Combine Selected Foods" onPress={() => showCombineFoodsPopup()}/>
         </View>
     );

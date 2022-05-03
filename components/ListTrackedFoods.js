@@ -87,7 +87,7 @@ function ListTrackedFoods(props)
                 global.lastName = "";
                 global.userId = -1;
 
-                props.navigation.navigate("Login");
+                props.appNavigator.navigate("Login");
                 return;
             }
 
@@ -144,7 +144,7 @@ function ListTrackedFoods(props)
                 global.lastName = "";
                 global.userId = -1;
 
-                props.navigation.navigate("Login");
+                props.appNavigator.navigate("Login");
                 return;
             }
 

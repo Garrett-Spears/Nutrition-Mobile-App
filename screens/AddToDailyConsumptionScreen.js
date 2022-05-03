@@ -7,7 +7,7 @@ function AddToDailyConsumptionScreen(props)
 {
    return(
     <View>
-      <NavigationBar />
+      <NavigationBar appNavigator={props.navigation} />
       <AddToDailyConsumption appNavigator={props.navigation} />
     </View>
    );

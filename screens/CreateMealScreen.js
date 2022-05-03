@@ -8,8 +8,8 @@ function CreateMealScreen(props)
 
 	return(
 	  	<View>
-			  <NavigationBar />
-			  <AddMeal />
+			  <NavigationBar appNavigator={props.navigation}/>
+			  <AddMeal appNavigator={props.navigation} />
 		</View>
 	);
 };

@@ -30,12 +30,11 @@ function AddToDailyConsumption(props)
             <Text>Search for meals to add to your list of foods consumed today.{"\n"}</Text>
             <Button title={toggleString} onPress={switchSearchState} />
 
+            {displayYourFood && <YourFood appNavigator={props.appNavigator}/>}
+            {!displayYourFood && <UsdaFood appNavigator={props.appNavigator}/> && false}
 
             <Button title="Create Meal" onPress={() => goToCreateMealPage()}/>
         </View>
     );
 };
 export default AddToDailyConsumption;
-
-/*{displayYourFood && <YourFood />}
-            {!displayYourFood && <UsdaFood />}*/

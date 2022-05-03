@@ -65,7 +65,7 @@ function AddMeal()
                 global.lastName = "";
                 global.userId = -1;
 
-                props.navigation.navigate("Login");
+                props.appNavigator.navigate("Login");
                 return;
             }
             

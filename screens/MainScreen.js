@@ -161,11 +161,11 @@ function MainScreen(props)
             <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
         </View>
 
-        {show && <ListTrackedFoods foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
+        {show && <ListTrackedFoods appNavigator={props.navigation} foods={foods} setMessage={setMessage} retrieveTrackedFoods={doRetrieveTrackedFoods} currentDate={selectedDate} />}
         <Text>{message}{message.length > 0 && "\n"}</Text>
         <Button title="Add To Your Daily Consumption" onPress={() => props.navigation.navigate("AddToDailyConsumption")}></Button>
 
-        {show && <DailyCharts foods={foods} />}
+        {show && <DailyCharts appNavigator={props.navigation} foods={foods} />}
       </ScrollView>
     </Fragment>
    );

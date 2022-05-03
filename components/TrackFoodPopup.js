@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, StyleSheet, Keyboard } from 'react-native';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import Modal from "react-native-modal";
+import {Picker} from '@react-native-picker/picker';
 
 function TrackFoodPopup(props)
 {   
       const [message,setMessage] = useState('');
       const [quantity,setQuantity] = useState(1);
       const [category,setCategory] = useState("0");
-
-      if (!props.show) {
-        return null;
-      }
     
       var food = props.food;
       var inputQty;
-      var _ud, ud, userId;
+      var userId;
       var name, calories, protein, carbs, fat, fiber, sugar, sodium, cholesterol;
       var servingLabel, showServing;
       
       // Get all the nutritional values from the selected food
-      _ud = localStorage.getItem('user_data');
-	    ud = JSON.parse(_ud);
-      userId = ud.id;
+      userId = global.userId;
       name = food.Name;
       calories = food.Calories;
       protein = food.Protein;
@@ -51,10 +48,35 @@ function TrackFoodPopup(props)
       
       async function doTrackFood()
       {
-        // Can't add empty food to tracked foods
-        if (parseFloat(quantity) <= 0)
+        let newQty = quantity;
+
+        // Nothing typed in so defualt to 1
+        if (newQty.length === 0)
         {
-            setMessage("Invalid quantity selected, please try again.")
+            newQty = "1";
+            return;
+        }
+
+        let decimalCount = 0;
+        for (let i = 0; i < newQty.length; i++)
+        {
+            if (newQty[i] === '.')
+                decimalCount++;
+        }
+
+        // Invalid number typed in
+        if (decimalCount >= 2 || (decimalCount === 1 && newQty.length === 1))
+        {
+            props.setMessage("Please enter a valid number.");
+            return;
+        }
+
+        newQty = parseFloat(newQty);
+
+        // Invalid quanitity so don't do anything
+        if (newQty <= 0)
+        {
+            props.setMessage("Please enter a quantity greater than 0.");
             return;
         }
 
@@ -79,11 +101,13 @@ function TrackFoodPopup(props)
             Sodium:sodium, 
             Cholesterol:cholesterol,
             Category:categoryInt,
-            Quantity:quantity,
+            Quantity:newQty,
             Date:date, 
             jwtToken:tok
         }
         var js = JSON.stringify(obj);
+        console.log(obj);
+        return;
 
         try
         {   
@@ -102,8 +126,12 @@ function TrackFoodPopup(props)
             else if (res.jwtToken.length === 0)
             {
                 alert("Your session has expired, please log in again.");
-                localStorage.removeItem("user_data")
-		            window.location.href = '/';
+
+                global.firstName = "";
+                global.lastName = "";
+                global.userId = -1;
+
+                props.appNavigator.navigate("Login");
                 return;
             }
 
@@ -115,10 +143,10 @@ function TrackFoodPopup(props)
             }
             else
             {
-                if (quantity === 1)
-                  setMessage('Successfully Added ' + quantity + ' \"' + name + '\" to your daily list of tracked foods.');
+                if (newQty === 1)
+                  setMessage('Successfully Added ' + newQty + ' \"' + name + '\" to your daily list of tracked foods.');
                 else
-                  setMessage('Successfully Added ' + quantity + ' \"' + name + '\"s to your daily list of tracked foods.');
+                  setMessage('Successfully Added ' + newQty + ' \"' + name + '\"s to your daily list of tracked foods.');
             }
         }
         catch(e)
@@ -149,32 +177,94 @@ function TrackFoodPopup(props)
         }
       };
 
+      function handlePickerChange(newCategory)
+      {
+        setMessage("");
+        setCategory(newCategory);
+      }
+
+      function handleQuantityChange(newQty)
+      {
+        setMessage("");
+        setQuantity(newQty);
+      }
+
+      const styles = StyleSheet.create({
+        centeredView: {
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 22
+        },
+        modalView: {
+          margin: 20,
+          backgroundColor: "white",
+          borderRadius: 20,
+          padding: 35,
+          alignItems: "center",
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 4,
+          elevation: 5
+        },
+        button: {
+          borderRadius: 20,
+          padding: 10,
+          elevation: 2
+        },
+        buttonOpen: {
+          backgroundColor: "#F194FF",
+        },
+        buttonClose: {
+          backgroundColor: "#2196F3",
+        },
+        textStyle: {
+          color: "white",
+          fontWeight: "bold",
+          textAlign: "center"
+        },
+        modalText: {
+          marginBottom: 15,
+          textAlign: "center"
+        }
+      });
+
       //<Text>Quantity: <input type="number" step="1" min="1" defaultValue="1" onInput={clearMessage} onKeyPress={preventInvalid} onChange={adjustNutritionalValues} ref={(c) => inputQty = c} /> </Text>          
       return (
-        <View id="trackFoodPopup">
-            <View id="innerTrackFoodPopup">
-                <Text>{name}</Text>
-                <Text>Calories: {calories * quantity}</Text>
-                <Text>Protein: {protein * quantity}</Text>
-                <Text>Carbohydrates: {carbs * quantity}</Text>
-                <Text>Fat: {fat * quantity}</Text>
-                <Text>Fiber: {fiber * quantity}</Text>
-                <Text>Sugar: {sugar * quantity}</Text>
-                <Text>Sodium: {sodium * quantity}</Text>
-                <Text>Cholesterol: {cholesterol * quantity}</Text>
-                <Text>{servingLabel}</Text>{showServing}
-                <Text>Choose meal (Optional):</Text>
-                <select id="categoryDropdown" onInput={clearMessage} onChange={(e) => setCategory(e.target.value)}>
-                  <option value="0"></option>
-                  <option value="1">Breakfast</option>
-                  <option value="2">Lunch</option>
-                  <option value="3">Dinner</option>
-                  <option value="4">Snack</option>
-                </select>
-                <Button id="trackFoodButton" class="buttons" title = "Track" onPress={() => doTrackFood()}/>
-                <Button id="closeTrackFoodPopupButton" class="buttons" title = "Close" onPress={()=>props.closePopup(setMessage, setQuantity, setCategory)}/> 
-                <Text id="trackFoodResult">{message}</Text>
-            </View>
+        <View style={styles.centeredView}>
+            <Modal isVisible={props.show}>
+              <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                      <Text>{name}</Text>
+                      <Text>Calories: {calories * quantity}</Text>
+                      <Text>Protein: {protein * quantity}</Text>
+                      <Text>Carbohydrates: {carbs * quantity}</Text>
+                      <Text>Fat: {fat * quantity}</Text>
+                      <Text>Fiber: {fiber * quantity}</Text>
+                      <Text>Sugar: {sugar * quantity}</Text>
+                      <Text>Sodium: {sodium * quantity}</Text>
+                      <Text>Cholesterol: {cholesterol * quantity}</Text>
+                      {showServing && <Text>{servingLabel}</Text>}
+                      <Text>Quantity: </Text>
+                      <ScrollView keyboardShouldPersistTaps="never"><TextInput keyboardType='numeric' onSubmitEditing={Keyboard.dismiss}cplaceholder="1" defaultValue="1" onChangeText = {(text) => handleQuantityChange(text)}></TextInput></ScrollView>
+                      <Text>Choose meal (Optional):</Text>
+                      <Picker selectedValue={category} onValueChange={(e) => handlePickerChange(e)}>
+                        <Picker.Item value="0" label=""/>
+                        <Picker.Item value="1" label="Breakfast"/>
+                        <Picker.Item value="2" label="Lunch"/>
+                        <Picker.Item value="3" label="Dinner"/>
+                        <Picker.Item value="4" label="Snack"/>
+                      </Picker>
+                      <Button class="buttons" title = "Track" onPress={() => doTrackFood()}/>
+                      <Button class="buttons" title = "Close" onPress={()=>props.closePopup(setMessage, setQuantity, setCategory)}/> 
+                      <Text>{message}</Text>
+                  </View>
+              </View>
+            </Modal>
         </View>
       );
   }
