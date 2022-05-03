@@ -45,7 +45,7 @@ function NavigationBar(props)
             <Button title="Home" onPress={() => goToHome()}/>
             <Button title="Profile" onPress={() => goToProfile()}/>
             <Button title="Goals" onPress={() => goToGoals()}/>
-            <Button title="Logout" onPress={() => doLogout()}/>        
+            <Button title="Log Out" onPress={() => props.appNavigator.navigate("Login")}/>        
         </View>
     );
 };

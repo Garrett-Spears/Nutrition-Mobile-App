@@ -6,7 +6,6 @@ function Main(props)
 {
    return(
     <View id="mainView">
-      <Button title="Log Out" onPress={() => props.appNavigator.navigate("Login")}/>
     </View>
    );
 };

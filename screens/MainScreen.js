@@ -5,7 +5,7 @@ import { Button, View, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import MainTitle from '../components/MainTitle';
 import Main from '../components/Main';
-
+import NavigationBar from '../components/NavigationBar';
 // Professor's Code Commented Out
 // Using Functional Components for now since they're simpler
 /*export default class Cardscreen extends Component {
@@ -151,7 +151,8 @@ function MainScreen(props)
     // Need to have fragment in react native to call multiple components
     <Fragment>
       <Main appNavigator={props.navigation} />
-      <View style={{ flexDirection: 'row' }}>
+      <NavigationBar appNavigator={props.navigation}/>
+      <View style={{ justifyContent: "center", flexDirection: 'row' }}>
         <Button title="Previous" onPress={decrementDay}/>
         <Text>{selectedDate.toDateString()}</Text>
         <Button title="Next" disabled={selectedDate.toLocaleDateString() === (new Date()).toLocaleDateString()} onPress={incrementDay} />
